@@ -1,0 +1,3 @@
+xterm*renderFont: true
+xterm*faceName: SourceCodePro
+xterm*faceSize: 14
