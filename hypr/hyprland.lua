@@ -19,7 +19,7 @@ hl.monitor({
     output   = "",
     mode     = "highres",
     position = "auto",
-    scale    = "1",
+    scale    = "auto",
 })
 
 
@@ -30,8 +30,11 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = "hyprlauncher"
+--local menu        = "hyprlauncher"
+local menu        = "wofi --show drun"
 local browser     = "firefox"
+local drawing     = "/usr/bin/krita"
+local websearch   = os.getenv("HOME") .. "/.config/hypr/scripts/web-search.sh"
 
 
 -------------------
@@ -49,8 +52,11 @@ local browser     = "firefox"
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
 -- end)
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & hyprpaper & discord")
+  hl.exec_cmd("waybar & hyprpaper & discord & steam")
 end)
+
+hl.window_rule({ match = { class = "steam" }, workspace = "10 silent" })
+hl.window_rule({ match = { class = "discord" }, workspace = "10 silent" })
 
 
 -------------------------------
@@ -61,7 +67,7 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-
+hl.env("NVD_BACKEND","direct")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -89,10 +95,10 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 1,
+        gaps_in  = 2,
         gaps_out = 2,
 
-        border_size = 1,
+        border_size = 2,
 
         col = {
             active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
@@ -100,7 +106,7 @@ hl.config({
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false,
+        resize_on_border = true,
 
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
@@ -199,11 +205,11 @@ hl.config({
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
 -- ???KEEP
-hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
-    },
-})
+-- hl.config({
+--     scrolling = {
+--         fullscreen_on_one_column = true,
+--     },
+-- })
 
 ----------------
 ----  MISC  ----
@@ -226,7 +232,7 @@ hl.config({
         kb_layout  = "us",
         kb_variant = "",
         kb_model   = "",
-        kb_options = "altwin:swap_lalt_lwin",
+        kb_options = "",
         kb_rules   = "",
 
         follow_mouse = 1,
@@ -250,10 +256,10 @@ hl.gesture({
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
--- hl.device({
---     name        = "epic-mouse-v1",
---     sensitivity = -0.5,
--- })
+hl.device({
+    name        = "epic-mouse-v1",
+    sensitivity = -0.5,
+})
 hl.device({
     name        = "microsoft-surface-type-cover-touchpad",
     sensitivity = -0.1,
@@ -274,17 +280,20 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(tostring(browser)))
 local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
--- ???KEEP hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" })) -- dwindle only
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(tostring(browser)))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.exec_cmd(drawing))
+hl.bind(mainMod .. " + + I", hl.dsp.exec_cmd(websearch))
+hl.bind(mainMod .. " + Delete", hl.dsp.exec_cmd("grim $(xdg-user-dir PICTURES)/Screenshots/$(date +%Y-%m-%d-%H%M%S)_screenshot.png"))
+hl.bind(mainMod .. " + SHIFT + Delete", hl.dsp.exec_cmd('grim -g "$(slurp)" $(xdg-user-dir PICTURES)/Screenshots/$(date +%Y-%m-%d-%H%M%S)_area_screenshot.png'))
 hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.resize({x=50,y=0,relative=true}))
 hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.resize({x=-50,y=0,relative=true}))
 
