@@ -9,17 +9,38 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+-- Enable Surface specific options
+local function is_surface_device()
+    local file = io.open("/sys/class/dmi/id/product_name", "r")
+    if not file then return false end
+
+    local product_name = file:read("*all")
+    file:close()
+
+    return string.match(product_name:lower(), "surface") ~= nil
+end
+
+local scaling_factor = "auto"
+local kb_options_value = "" 
+local startup_apps = "waybar & hyprpaper & discord & steam"
+
+if is_surface_device() then
+    scaling_factor = "1"
+    kb_options_value = "altwin:swap_lalt_lwin"
+    startup_apps = "waybar & hyprpaper & discord"
+end
 
 ------------------
 ---- MONITORS ----
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+
 hl.monitor({
     output   = "",
     mode     = "highres",
     position = "auto",
-    scale    = "auto",
+    scale    = scaling_factor,
 })
 
 
@@ -52,7 +73,7 @@ local websearch   = os.getenv("HOME") .. "/.config/hypr/scripts/web-search.sh"
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
 -- end)
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & hyprpaper & discord & steam")
+  hl.exec_cmd(startup_apps)
 end)
 
 hl.window_rule({ match = { class = "steam" }, workspace = "10 silent" })
@@ -232,7 +253,7 @@ hl.config({
         kb_layout  = "us",
         kb_variant = "",
         kb_model   = "",
-        kb_options = "",
+        kb_options = kb_options_value,
         kb_rules   = "",
 
         follow_mouse = 1,
