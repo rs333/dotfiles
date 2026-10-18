@@ -1,0 +1,31 @@
+# Disable the Synaptics touchpad whenever an external mouse is connected.
+#
+# Device: SYNA3130:00 06CB:CFE1 Touchpad
+#   Bus=0018 (I2C)  Vendor=06cb  Product=cfe1
+#   Sysfs: .../0018:06CB:CFE1.0001/input/input9
+#   Host:  HP EliteBook 8 G1i
+#
+# libinput's "disabled-on-external-mouse" send-events mode makes libinput ignore
+# touchpad input while any external pointer is present and re-enable it when the
+# mouse is unplugged. Hyprland 0.56.2 cannot set this mode from its own config,
+# so we set it at the libinput/hwdb layer instead.
+#
+# INSTALL (needs root):
+#   sudo cp ~/.config/hypr/71-synaptics-touchpad-disable-on-mouse.hwdb \
+#           /etc/udev/hwdb.d/71-synaptics-touchpad-disable-on-mouse.hwdb
+#   sudo systemd-hwdb update
+#   sudo udevadm trigger --sysname-match="event6"      # the touchpad's evdev node
+#   # (or just reboot)
+#
+# VERIFY:
+#   libinput list-devices        # touchpad block should show:
+#                                #   Send-events modes: enabled disabled disabled-on-external-mouse
+#                                # and that last mode active while your mouse is plugged in
+#   udevadm info /dev/input/event6 | grep -i sendevents
+#
+# NOTE: match string taken verbatim from the device's real modalias:
+#   input:b0018v06CBpCFE1e0100-...
+# so bus=0018, vendor=06CB, product=CFE1 (4 hex, upper-cased).
+
+evdev:input:b0018v06CBpCFE1*
+ LIBINPUT_ATTR_SENDEVENTS_DEFAULT=disabled-on-external-mouse
