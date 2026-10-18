@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=TMux
+Comment=A new instance of a terminal multiplexer
+Exec=kitty tmux
+Terminal=false
+Type=Application
+#Icon=mini.xterm
+Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;cmd;
+X-Desktop-File-Install-Version=0.24
