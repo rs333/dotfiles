@@ -1,3 +1,6 @@
 [submodule "packages/nvim"]
 	path = packages/nvim
 	url = git@github.com:rs333/nvim
+[submodule "internal"]
+	path = internal
+	url = git@github.com:rs333/dotfiles.private
