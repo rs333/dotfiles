@@ -48,3 +48,7 @@ hl.device({
     sensitivity = -0.1,
     disable_while_typing = true
 })
+hl.device({
+    name        = "microsoft-microsoft-3-button-mouse-with-intellieye(tm)",
+    sensitivity = 1.0,
+})
