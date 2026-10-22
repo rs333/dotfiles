@@ -2,6 +2,8 @@
 # Setup vim mode native in zsh
 export EDITOR=nvim
 export VISUAL=nvim
+export MANPAGER='less -X'
+alias less='less -X'
 # --- Vi mode -----------------------------------------------------------------
 # bindkey -v must come BEFORE any custom bindkey calls: it replaces the main
 # keymap, discarding anything bound earlier.
