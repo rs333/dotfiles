@@ -82,3 +82,42 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+
+# Begin blinking text mode (Not actually blinking)
+export LESS_TERMCAP_mb=$'\e[4;1;36m'
+
+# Begin bold text mode
+export LESS_TERMCAP_md=$'\e[1;36m'
+
+# End all special formatting
+export LESS_TERMCAP_me=$'\e[0m'
+
+# End standout mode
+export LESS_TERMCAP_se=$'\e[0m'
+
+# Begin standout mode
+export LESS_TERMCAP_so=$'\e[1;33;44m'
+
+# End underline mode
+export LESS_TERMCAP_ue=$'\e[0m'
+
+# Begin underline mode
+export LESS_TERMCAP_us=$'\e[4;1;32m'
+
+# Begin reverse-video mode
+export LESS_TERMCAP_mr=$'\e[7m'
+
+# Begin dim/half-bright mode
+export LESS_TERMCAP_mh=$'\e[2m'
+
+# Begin subscript mode
+export LESS_TERMCAP_ZN=$'\e[74m'
+
+# End subscript mode
+export LESS_TERMCAP_ZV=$'\e[75m'
+
+# Begin superscript mode
+export LESS_TERMCAP_ZO=$'\e[73m'
+
+# End superscript mode
+export LESS_TERMCAP_ZW=$'\e[75m'
