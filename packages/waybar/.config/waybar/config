@@ -1,0 +1,86 @@
+// Waybar config for Hyprland (waybar 0.15, built into ~/.local).
+// Icons are Font Awesome 7 Free (Solid) + Brands, installed in ~/.local/share/fonts/fontawesome.
+// Glyphs are written as \uXXXX escapes so the file stays plain ASCII.
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 6,
+
+    "modules-left":   ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
+    "modules-right":  ["tray", "pulseaudio", "backlight", "network", "battery", "clock"],
+
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "on-click": "activate",
+        "on-scroll-up":   "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "sort-by-number": true,
+        "all-outputs": false
+    },
+
+    "hyprland/submap": {
+        "format": "\uf11c {}"
+    },
+
+    "hyprland/window": {
+        "max-length": 80,
+        "separate-outputs": true,
+        "rewrite": {}
+    },
+
+    "tray": {
+        "spacing": 8
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% \uf294",
+        "format-muted": "\uf6a9 muted",
+        "format-icons": {
+            "headphone": "\uf025",
+            "headset":   "\uf025",
+            "default":   ["\uf026", "\uf027", "\uf028"]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up":   "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-",
+        "max-volume": 100,
+        "tooltip-format": "{desc}"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "\uf185 {percent}%",
+        "on-scroll-up":   "brightnessctl -e4 -n2 set 2%+",
+        "on-scroll-down": "brightnessctl -e4 -n2 set 2%-"
+    },
+
+    "network": {
+        "interface": "wlp0s20f3",
+        "format-wifi": "\uf1eb {essid} {signalStrength}%",
+        "format-ethernet": "\uf6ff {ipaddr}",
+        "format-disconnected": "\uf127 offline",
+        "tooltip-format": "{ifname} {ipaddr}/{cidr} via {gwaddr}",
+        "on-click": "nm-connection-editor"
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "adapter": "AC",
+        "states": { "warning": 25, "critical": 10 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "\uf0e7 {capacity}%",
+        "format-plugged": "\uf1e6 {capacity}%",
+        "format-full": "\uf240 full",
+        "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
+        "tooltip-format": "{timeTo}  ({power:.1f} W)"
+    },
+
+    "clock": {
+        "format": "\uf017 {:%a %b %d  %H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": { "mode": "month", "weeks-pos": "left" }
+    }
+}

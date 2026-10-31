@@ -1,0 +1,82 @@
+/* Waybar style for Hyprland -- dark, flat, matching the config's border colours. */
+
+* {
+    font-family: "Noto Sans", "Font Awesome 7 Free", "Font Awesome 7 Brands", "DejaVu Sans", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(26, 26, 26, 0.92);
+    color: #e6e6e6;
+    border-bottom: 2px solid rgba(51, 204, 255, 0.6);
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #9a9a9a;
+    background: transparent;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.active {
+    color: #e6e6e6;
+    border-bottom: 2px solid #33ccff;
+}
+
+#workspaces button.urgent {
+    color: #ff6b6b;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+#submap {
+    color: #00ff99;
+    padding: 0 8px;
+}
+
+#window {
+    color: #cfcfcf;
+}
+
+#tray,
+#pulseaudio,
+#backlight,
+#network,
+#battery,
+#clock {
+    padding: 0 10px;
+}
+
+#pulseaudio.muted {
+    color: #9a9a9a;
+}
+
+#network.disconnected {
+    color: #9a9a9a;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #00ff99;
+}
+
+#battery.warning:not(.charging) {
+    color: #ffb347;
+}
+
+#battery.critical:not(.charging) {
+    color: #ff6b6b;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
