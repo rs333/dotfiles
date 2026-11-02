@@ -32,15 +32,18 @@
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}% \uf294",
-        "format-muted": "\uf6a9 muted",
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% \uf294 {format_source}",
+        "format-muted": "\uf6a9 muted {format_source}",
+        "format-source": "\uf130",
+        "format-source-muted": "\uf131",
         "format-icons": {
             "headphone": "\uf025",
             "headset":   "\uf025",
             "default":   ["\uf026", "\uf027", "\uf028"]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
         "on-scroll-up":   "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-",
         "max-volume": 100,
