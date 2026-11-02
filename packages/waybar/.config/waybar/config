@@ -1,6 +1,3 @@
-// Waybar config for Hyprland (waybar 0.15, built into ~/.local).
-// Icons are Font Awesome 7 Free (Solid) + Brands, installed in ~/.local/share/fonts/fontawesome.
-// Glyphs are written as \uXXXX escapes so the file stays plain ASCII.
 {
     "layer": "top",
     "position": "top",
@@ -52,13 +49,13 @@
 
     "backlight": {
         "device": "intel_backlight",
-        "format": "\uf185 {percent}%",
+        "format": "{icon} {percent}%",
         "on-scroll-up":   "brightnessctl -e4 -n2 set 2%+",
-        "on-scroll-down": "brightnessctl -e4 -n2 set 2%-"
+        "on-scroll-down": "brightnessctl -e4 -n2 set 2%-",
+    	"format-icons": ["", "", "", "", "", "", "", "", ""]
     },
 
     "network": {
-        "interface": "wlp0s20f3",
         "format-wifi": "\uf1eb {essid} {signalStrength}%",
         "format-ethernet": "\uf6ff {ipaddr}",
         "format-disconnected": "\uf127 offline",
@@ -67,8 +64,6 @@
     },
 
     "battery": {
-        "bat": "BAT0",
-        "adapter": "AC",
         "states": { "warning": 25, "critical": 10 },
         "format": "{icon} {capacity}%",
         "format-charging": "\uf0e7 {capacity}%",
@@ -80,6 +75,7 @@
 
     "clock": {
         "format": "\uf017 {:%a %b %d  %H:%M}",
+        "format-alt": "\uf017 {:%Y-%m-%d  %H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": { "mode": "month", "weeks-pos": "left" }
     }
