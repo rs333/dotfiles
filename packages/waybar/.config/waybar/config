@@ -52,7 +52,7 @@
         "format": "{icon} {percent}%",
         "on-scroll-up":   "brightnessctl -e4 -n2 set 2%+",
         "on-scroll-down": "brightnessctl -e4 -n2 set 2%-",
-    	"format-icons": ["", "", "", "", "", "", "", "", ""]
+    	"format-icons": ["\ud83c\udf11\ufe0f", "\ud83c\udf12\ufe0f", "\ud83c\udf13\ufe0f", "\ud83c\udf14\ufe0f", "\ud83c\udf15\ufe0f", "\ud83d\udd05", "\ud83d\udd06"]
     },
 
     "network": {
