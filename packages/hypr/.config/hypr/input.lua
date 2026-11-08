@@ -7,17 +7,17 @@
 
 hl.config({
     input = {
-        kb_layout  = "us",
-        kb_variant = "",
-        kb_model   = "",
-        kb_options = "altwin:swap_lalt_lwin",
-        kb_rules   = "",
+        kb_layout    = "us",
+        kb_variant   = "",
+        kb_model     = "",
+        kb_options   = "altwin:swap_lalt_lwin",
+        kb_rules     = "",
 
         follow_mouse = 1,
 
-        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity  = 0, -- -1.0 - 1.0, 0 means no modification.
 
-        touchpad = {
+        touchpad     = {
             disable_while_typing = true,
             natural_scroll = false,
             middle_button_emulation = false,
@@ -39,13 +39,13 @@ hl.device({
     sensitivity = -0.5,
 })
 hl.device({
-    name        = "microsoft-surface-type-cover-touchpad",
-    sensitivity = -0.1,
+    name                 = "microsoft-surface-type-cover-touchpad",
+    sensitivity          = -0.1,
     disable_while_typing = true
 })
 hl.device({
-    name        = "microsoft-surface-type-cover-mouse",
-    sensitivity = -0.1,
+    name                 = "microsoft-surface-type-cover-mouse",
+    sensitivity          = -0.1,
     disable_while_typing = true
 })
 hl.device({
