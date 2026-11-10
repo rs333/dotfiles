@@ -121,3 +121,5 @@ export LESS_TERMCAP_ZO=$'\e[73m'
 
 # End superscript mode
 export LESS_TERMCAP_ZW=$'\e[75m'
+
+[[ -r ~/.zshrc.work ]] && . ~/.zshrc.work
